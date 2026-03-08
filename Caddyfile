@@ -1,0 +1,37 @@
+{$N8N_HOST} {
+	reverse_proxy n8n:5678 {
+		flush_interval -1
+		transport http {
+			keepalive 30s
+			keepalive_idle_conns 10
+		}
+	}
+
+	header {
+		# Security headers
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+
+		# Allow n8n service worker for mobile PWA support
+		Service-Worker-Allowed "/"
+	}
+
+	# WebSocket support for real-time workflow updates on mobile
+	@websocket {
+		header Connection *Upgrade*
+		header Upgrade websocket
+	}
+	reverse_proxy @websocket n8n:5678
+
+	# Gzip compression for faster mobile loading
+	encode gzip zstd
+
+	log {
+		output file /data/access.log {
+			roll_size 10mb
+			roll_keep 3
+		}
+	}
+}
