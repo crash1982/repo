@@ -89,3 +89,69 @@ docker compose pull && docker compose up -d
 - Caddy's `flush_interval -1` disables response buffering for streaming/SSE support.
 - Ports 80 and 443 must be open on the host firewall for Caddy's ACME challenge and HTTPS.
 - The n8n health check has a 30s interval with 3 retries — initial startup can take up to ~90s before Caddy starts.
+
+---
+
+# Owner Context — Kyle (Global)
+
+## Who I Am
+- Owner/operator of **Clubhouse on Main (CHOM)** — sports bar & entertainment venue at 2866 Main St, Glastonbury, CT (axe throwing, golf simulators, dining, bar)
+- Actively building **Clubhouse on Pratt (CHOP)** — second location in Hartford, CT targeting mid-2026 opening
+- Running a **two-AI coordination system**: Claude handles strategic/creative work; **AI-Karl** (OpenClaw agent) manages daily technical operations and automation
+
+## Infrastructure
+- Ubuntu server: `192.168.86.25` / Tailscale: `100.116.172.80`
+- n8n dashboard: SSH tunnel at `localhost:18789`
+- Staff dashboard (Daily Briefing v6): nginx port `9999` via Tailscale Funnel
+- Karl's email: `aikarl111923@gmail.com`
+- Coordination Google Drive folder: `drive.google.com/drive/folders/10k3ibnHe8DcZrgd_XfZTUx0uSXRZb6xI`
+  - Subfolders: AI-Karl-Reports, Session-Summaries, Work-Products
+- Master Todo Tracker (Google Doc): `1-ANinedv5zW_DNK5bcDVxkTn_q6UigRrUBihQBLn76s`
+
+## Tech Stack
+- **Automation**: n8n (self-hosted), OpenClaw agent framework
+- **POS**: Toast (note: known bug — totals include tax/tips, use net sales only)
+- **Scheduling**: 7Shifts (note: pagination returns ~70% of staff — use full fetch)
+- **Server**: Ubuntu 24, nginx, Python, ReportLab for PDF generation
+- **Languages**: Python preferred for scripting; Node.js for n8n integrations
+
+## Key People
+- **Sarah** — GM (CHOM)
+- **Nate (FOH)** — Front of House manager
+- **Maddy** — Bar Manager
+- **Nate (BOH)** — Kitchen Manager
+- **Hans Hansen** — Architect on CHOP build-out
+
+## Operational Context
+- **CHOM revenue targets**: Bar 50%, Food 25%, Sims 20%, Events 5%
+- **Labor targets**: Toast <20%, Total <30%
+- **COGS targets**: Kitchen 27%, Bar 15%; Net Profit: 35%
+- **Core values**: Own the Experience · Be Active Not Passive · Find the Yes · Play to Win
+- Running EOS/Traction methodology (L10 meetings, scorecards, rocks, IDS)
+
+## Todo Tracker Protocol
+- ID format: `[SCOPE]-[YYYY-MM-DD]-[###]`
+- Scopes: L10, CHOP, Automation, OpenClaw (keep personal items separate)
+- Claude cannot write directly to the tracker — create markdown handoff files at `/mnt/user-data/outputs/` with human-readable tables + JSON blocks for Karl to process
+
+## Session End Protocol
+At end of each session, create a handoff summary with:
+1. Work completed
+2. Files created
+3. AI-Karl technical tasks
+4. Next session planning
+
+Upload to Session-Summaries folder in coordination drive.
+
+## Working Style Preferences
+- Prefer **iterative, targeted fixes** over full rebuilds
+- Direct communication — skip preamble, get to the point
+- Practical over elaborate solutions
+- Strong preference for automation and scalable infrastructure
+- Mobile-readable responses when possible (iPhone + desktop usage)
+
+## Active Projects (as of early 2026)
+- CHOP build-out (MEP/hood quotes, electrical load ~168A on 208V 3-phase, architectural review)
+- n8n: Daily Briefing v6, Weekly Scheduling Engine, Invoice Monitor v2
+- Manager Bot (Claude Haiku, reactive Q&A for management team)
+- Automation Roadmap Phases 3–5 (advanced scheduling, HR automation, predictive analytics)
