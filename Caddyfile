@@ -25,6 +25,13 @@
 	}
 	reverse_proxy @websocket n8n:5678
 
+	# Web terminal (ttyd) — password-protected
+	handle_path /terminal* {
+		reverse_proxy ttyd:7681 {
+			flush_interval -1
+		}
+	}
+
 	# Gzip compression for faster mobile loading
 	encode gzip zstd
 

@@ -22,6 +22,23 @@ services:
       timeout: 10s
       retries: 3
 
+  ttyd:
+    image: tsl0922/ttyd:latest
+    restart: unless-stopped
+    command:
+      - ttyd
+      - --writable
+      - --base-path
+      - /terminal
+      - --credential
+      - ${TTYD_USER:-admin}:${TTYD_PASSWORD:?Set TTYD_PASSWORD in .env}
+      - bash
+    volumes:
+      - workspace:/workspace
+    working_dir: /workspace
+    networks:
+      - n8n-net
+
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
@@ -42,6 +59,7 @@ volumes:
   n8n_data:
   caddy_data:
   caddy_config:
+  workspace:
 
 networks:
   n8n-net:
