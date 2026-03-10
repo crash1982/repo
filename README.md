@@ -47,6 +47,64 @@ n8n works as a Progressive Web App. Adding it to your home screen gives you an a
 - **iOS Safari**: Tap the share button > "Add to Home Screen"
 - **Android Chrome**: Tap the menu (three dots) > "Add to Home screen" or "Install app"
 
+## Accessing from Termux (Android)
+
+[Termux](https://termux.dev) gives you a full Linux terminal on your phone. You can SSH into your server to manage n8n and run commands directly.
+
+### One-time Termux setup
+
+Open Termux on your phone and run:
+
+```bash
+# Install SSH client
+pkg update && pkg install openssh
+
+# Generate an SSH key (press Enter to accept defaults)
+ssh-keygen -t ed25519
+
+# Copy your public key to the server (replace with your server details)
+ssh-copy-id user@your-server-ip
+```
+
+### Connect to your server
+
+```bash
+ssh user@your-server-ip
+```
+
+### Recommended: Create a quick alias
+
+Add this to your Termux shell config (`~/.bashrc` or `~/.zshrc`):
+
+```bash
+alias n8n-server='ssh user@your-server-ip'
+```
+
+Then just type `n8n-server` to connect.
+
+### Useful commands once connected
+
+```bash
+# Check n8n status
+docker compose ps
+
+# View live logs
+docker compose logs -f n8n
+
+# Restart n8n
+docker compose restart n8n
+
+# Update n8n
+docker compose pull && docker compose up -d
+```
+
+### Tips for Termux
+
+- **Swipe left from the edge** to open the session drawer (multiple terminals)
+- **Volume Up + Q** shows an extra keys row with Ctrl, Alt, Tab, etc.
+- Install `tmux` (`pkg install tmux`) to keep sessions alive if you disconnect
+- Install `mosh` (`pkg install mosh`) for a connection that survives network switches (Wi-Fi to mobile data)
+
 ## Managing
 
 ```bash
