@@ -1,0 +1,17 @@
+#!/bin/bash
+# Quick idea capture — appends to IDEAS.md and pushes
+# Usage: ./idea "your idea here"
+
+if [ -z "$1" ]; then
+  echo "Usage: idea \"your idea here\""
+  exit 1
+fi
+
+REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
+DATE=$(date '+%Y-%m-%d %H:%M')
+
+echo "- [$DATE] $*" >> "$REPO_DIR/IDEAS.md"
+cd "$REPO_DIR"
+git add IDEAS.md
+git commit -m "idea: $*"
+git push
